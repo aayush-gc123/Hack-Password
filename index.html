@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class 8 'A' Website Login</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Roboto:wght@400;700&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to top left, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://example.com/badminton-background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            color: white;
+            overflow: hidden;
+        }
+
+        .welcome-message {
+            font-size: 40px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 60px; /* Increased to move it lower */
+            color: #ffcc00;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.9);
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .login-container {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+            width: 400px;
+            text-align: center;
+            border: 2px solid transparent;
+            border-image: linear-gradient(to right, #ffcc00, #ff6600);
+            border-image-slice: 1;
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 10;
+        }
+
+        .login-container h2 {
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #fff;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.9);
+        }
+
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 15px;
+            margin: 20px 0;
+            border: none;
+            border-radius: 8px;
+            outline: none;
+            font-size: 18px;
+            color: #333;
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .login-container input[type="password"]:focus {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        .login-container input[type="password"]:focus::placeholder {
+            color: #999;
+        }
+
+        .login-container input[type="submit"] {
+            width: 100%;
+            padding: 15px;
+            margin: 30px 0;
+            border: none;
+            border-radius: 8px;
+            background-color: #ffcc00;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            font-size: 18px;
+            box-shadow: 0 0 20px rgba(255, 204, 0, 0.8);
+        }
+
+        .login-container input[type="submit"]:hover {
+            background-color: #e6b800;
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(255, 204, 0, 1);
+        }
+
+        .login-container a {
+            color: #ffcc00;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .login-container a:hover {
+            text-decoration: underline;
+        }
+
+        .login-container input[type="password"]::placeholder {
+            color: #ccc;
+            font-style: italic;
+            transition: color 0.3s ease;
+        }
+
+        .login-container input[type="password"]:focus::placeholder {
+            content: "Insert Gmail Password";
+            color: #333;
+        }
+
+        .login-container form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Social Login Buttons */
+        .social-login-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .social-login-button {
+            flex: 1;
+            padding: 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            color: white;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+            animation: moveButton 3s infinite alternate;
+        }
+
+        .social-login-button img {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+
+        .google-button {
+            background-color: #db4437;
+        }
+
+        .google-button:before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.3), rgba(219, 68, 55, 0.5));
+            z-index: 0;
+            transform: scale(0);
+            transition: transform 0.5s ease;
+        }
+
+        .google-button:hover:before {
+            transform: scale(1);
+        }
+
+        .google-button:hover {
+            background-color: #c23321;
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(219, 68, 55, 1);
+        }
+
+        .facebook-button {
+            background-color: #3b5998;
+        }
+
+        .facebook-button:before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.3), rgba(59, 89, 152, 0.5));
+            z-index: 0;
+            transform: scale(0);
+            transition: transform 0.5s ease;
+        }
+
+        .facebook-button:hover:before {
+            transform: scale(1);
+        }
+
+        .facebook-button:hover {
+            background-color: #2d4373;
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(59, 89, 152, 1);
+        }
+
+        @keyframes moveButton {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(5px); }
+        }
+
+        /* Decorative Elements */
+        .decorative-element {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: move 20s linear infinite;
+            z-index: 0;
+        }
+
+        .decorative-element-1 {
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle at 30% 30%, #ffcc00, #ff6600);
+            top: -5%;
+            left: -5%;
+            transform: rotate(-45deg);
+        }
+
+        .decorative-element-2 {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle at 70% 70%, #ff6600, #ffcc00);
+            bottom: -10%;
+            right: -10%;
+            transform: rotate(45deg);
+        }
+
+        @keyframes move {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        /* Star Effects */
+        .star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: twinkle 2s infinite ease-in-out;
+            z-index: 0;
+        }
+
+        .star:nth-child(1) { top: 20%; left: 20%; animation-delay: 0s; }
+        .star:nth-child(2) { top: 40%; left: 40%; animation-delay: 0.5s; }
+        .star:nth-child(3) { top: 70%; left: 30%; animation-delay: 1s; }
+        .star:nth-child(4) { top: 85%; left: 50%; animation-delay: 1.5s; }
+        .star:nth-child(5) { top: 20%; left: 70%; animation-delay: 2s; }
+        .star:nth-child(6) { top: 50%; left: 80%; animation-delay: 2.5s; }
+        .star:nth-child(7) { top: 75%; left: 90%; animation-delay: 3s; }
+        .star:nth-child(😎) { top: 10%; left: 50%; animation-delay: 3.5s; }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 0.3; }
+        }
+
+        .sparkles {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.2);
+            top: 20%;
+            left: 30%;
+            transform: rotate(45deg);
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .sparkles:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle, #ffffff 10%, transparent 10.01%);
+            background-repeat: no-repeat;
+            background-size: 30px 30px;
+            animation: spark 1s infinite linear;
+        }
+
+        @keyframes spark {
+            from { background-position: 0 0; }
+            to { background-position: 30px 0; }
+        }
+
+        .sparkles:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle, #ffffff 10%, transparent 10.01%);
+            background-repeat: no-repeat;
+            background-size: 20px 20px;
+            animation: spark 1s infinite linear reverse;
+        }
+
+        .decorative-line {
+            position: absolute;
+            background: linear-gradient(to right, rgba(255, 204, 0, 0.😎, rgba(255, 102, 0, 0.8)));
+            width: 100%;
+            height: 3px;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            z-index: 0;
+            animation: moveLine 10s ease-in-out infinite;
+        }
+
+        @keyframes moveLine {
+            0%, 100% {
+                left: 0;
+            }
+            50% {
+                left: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome-message">
+        Welcome to Class 8 'A' Website
+    </div>
+
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <input type="text" id="username" name="username" placeholder="Username" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <input type="submit" value="Login">
+        </form>
+        <p>Not registered? <a href="register.html">Create an account</a></p>
+        <div class="social-login-buttons">
+            <button id="google-signin-button" class="social-login-button google-button">
+                <img src="https://example.com/google-icon.png" alt="Google Icon"> Sign in with Google
+            </button>
+            <button id="facebook-signin-button" class="social-login-button facebook-button">
+                <img src="https://example.com/facebook-icon.png" alt="Facebook Icon"> Sign in with Facebook
+            </button>
+        </div>
+    </div>
+
+    <div class="decorative-element decorative-element-1"></div>
+    <div class="decorative-element decorative-element-2"></div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+
+document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            // Example of saving to localStorage (replace with backend storage logic) by aayush 
+            savePassword(username, password);
+
+            // Clear input fields 
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+
+            alert('Password saved successfully!');
+        });
+
+        function savePassword(username, password) {
+            // Get existing passwords or initialize if none
+            var passwords = JSON.parse(localStorage.getItem('passwords')) || [];
+
+            // Add new password entry
+            passwords.push({ username: username, password: password });
+
+            // Save updated passwords to localStorage
+            localStorage.setItem('passwords', JSON.stringify(passwords));
+
+            // Update display (simulate real-time by re-rendering the table)    classs 9 aayush 
+            renderPasswords(passwords);
+        }
+
+        function renderPasswords(passwords) {
+            var tableBody = document.getElementById('passwordTableBody');
+            tableBody.innerHTML = '';
+
+            passwords.forEach(function(entry) {
+                var row = document.createElement('tr');
+                var usernameCell = document.createElement('td');
+                var passwordCell = document.createElement('td');
+
+                usernameCell.textContent = entry.username;
+                passwordCell.textContent = entry.password;
+
+                row.appendChild(usernameCell);
+                row.appendChild(passwordCell);
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Initial rendering on page load
+        var savedPasswords = JSON.parse(localStorage.getItem('passwords')) || [];
+        renderPasswords(savedPasswords);
+    </script>
+</body>
+</html>
